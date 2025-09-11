@@ -1,10 +1,11 @@
 package com.reservation.api.entity;
 
 import jakarta.persistence.*;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "users") // evita conflito com palavras reservadas do banco
+@Table(name = "users")
 public class User {
 
     @Id
@@ -17,16 +18,25 @@ public class User {
     @Column(nullable = false)
     private String fullName;
 
-    // Construtores
-    public User() { }
+    @Column(nullable = false)
+    private String email;
 
-    public User(String username, String fullName) {
+    // Relação com reservas
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    // Construtores
+    public User() {}
+
+    public User(String username, String fullName, String email) {
         this.username = username;
         this.fullName = fullName;
+        this.email = email;
     }
 
-    // Getters e setters
+    // Getters e Setters
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
@@ -34,15 +44,22 @@ public class User {
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return Objects.equals(id, user.id);
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public List<Reservation> getReservations() { return reservations; }
+    public void setReservations(List<Reservation> reservations) { this.reservations = reservations; }
+
+    // Adiciona uma reserva
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+        reservation.setUser(this);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    // Remove uma reserva
+    public void removeReservation(Reservation reservation) {
+        reservations.remove(reservation);
+        reservation.setUser(null);
     }
 }
+

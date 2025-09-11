@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reservations")
-public class Reservation {
+public class ReservationHistoric {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,14 +25,19 @@ public class Reservation {
     @Column(nullable = false)
     private LocalDateTime endTime;
 
-    // Construtores
-    public Reservation() {}
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ReservationStatus status = ReservationStatus.ATIVA; // Estado da reserva
 
-    public Reservation(Room room, User user, LocalDateTime startTime, LocalDateTime endTime) {
+    // Construtores
+    public ReservationHistoric() {}
+
+    public ReservationHistoric(Room room, User user, LocalDateTime startTime, LocalDateTime endTime) {
         this.room = room;
         this.user = user;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.status = ReservationStatus.ATIVA;
     }
 
     // Getters e Setters
@@ -50,4 +55,7 @@ public class Reservation {
 
     public LocalDateTime getEndTime() { return endTime; }
     public void setEndTime(LocalDateTime endTime) { this.endTime = endTime; }
+
+    public ReservationStatus getStatus() { return status; }
+    public void setStatus(ReservationStatus status) { this.status = status; }
 }
