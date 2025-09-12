@@ -13,25 +13,7 @@ Para colocar este projeto em funcionamento na sua máquina local, siga estes pas
 
   * **Java Development Kit (JDK)**: A versão 17 ou superior é necessária.
   * **Maven**: Usado para gerenciamento de dependências e compilação do projeto.
-
-### Instalação
-
-1.  **Clone o repositório**:
-    ```bash
-    git clone https://github.com/SEU_USUARIO/backup-room-reservation-api.git
-    cd backup-room-reservation-api
-    ```
-2.  **Compile o projeto**:
-    ```bash
-    ./mvnw clean install
-    ```
-3.  **Execute a aplicação**:
-    ```bash
-    ./mvnw spring-boot:run
-    ```
-
-A aplicação será iniciada em `http://localhost:8080`.
-
+    
 -----
 
 ## 🛠️ Tecnologias usadas
