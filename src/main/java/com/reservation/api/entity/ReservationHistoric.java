@@ -1,5 +1,6 @@
 package com.reservation.api.entity;
 
+import com.reservation.api.repository.ReservationStatus;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 

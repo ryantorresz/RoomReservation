@@ -1,4 +1,4 @@
-package com.reservation.api.entity;
+package com.reservation.api.repository;
 
 public enum ReservationStatus {
     ATIVA,
